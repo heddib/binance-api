@@ -1,0 +1,24 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    name: Déploiement
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonage du repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Déploiement vers le serveur
+        uses: idoberko2/dokku-deploy-github-action@v1
+        with:
+            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+            dokku-host: ${{ secrets.DOKKU_HOST }}
+            app-name: ${{ secrets.APP_NAME }}
+            git-push-flags: '-vvv'
+            remote-branch: 'main'
