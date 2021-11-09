@@ -22,4 +22,3 @@ jobs:
             app-name: ${{ secrets.APP_NAME }}-staging
             git-push-flags: '-vvv'
             remote-branch: 'develop'
-            
